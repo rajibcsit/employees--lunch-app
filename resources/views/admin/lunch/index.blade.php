@@ -8,7 +8,10 @@
                 <div class="card-header">
                     <i class="fa fa-utensils"></i> Today's Lunch Entries
                     <span class="float-end">
-                        <i class="fa fa-calculator"></i> Total Entries Today: {{ $totalEntriesToday }}
+                        <i class="fa fa-hashtag"></i> Total Entries: {{ $totalEntriesToday }} |
+                        <i class="fa fa-clock"></i> Pending: {{ $totalPending }} |
+                        <i class="fa fa-times"></i> Rejected: {{ $totalRejected }} |
+                        <i class="fa fa-check"></i> Approved: {{ $totalApproved }}
                     </span>
                 </div>
                 <div class="card-body">

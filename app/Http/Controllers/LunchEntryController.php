@@ -49,7 +49,16 @@ class LunchEntryController extends Controller
         // Count total lunch entries for today
         $totalEntriesToday = $entries->count();
 
-        return view('admin.lunch.index', compact('entries', 'totalEntriesToday'));
+        // Count total pending entries
+        $totalPending = $entries->where('status', 'pending')->count();
+
+        // Count total rejected entries
+        $totalRejected = $entries->where('status', 'rejected')->count();
+
+        // Count total approved entries
+        $totalApproved = $entries->where('status', 'approved')->count();
+
+        return view('admin.lunch.index', compact('entries', 'totalEntriesToday', 'totalPending', 'totalRejected', 'totalApproved'));
     }
 
     // Admin Approve a lunch entry
