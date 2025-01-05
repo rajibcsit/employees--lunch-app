@@ -7,6 +7,9 @@
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-utensils"></i> Today's Lunch Entries
+                    <span class="float-end">
+                        <i class="fa fa-calculator"></i> Total Entries Today: {{ $totalEntriesToday }}
+                    </span>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered data-table">

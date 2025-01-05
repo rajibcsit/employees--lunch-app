@@ -39,24 +39,27 @@ class LunchEntryController extends Controller
         return redirect()->back()->with('success', 'Lunch entry submitted successfully.');
     }
 
-    // Admin: View all lunch entries for today
+    // Admin View all lunch entries for today
     public function adminIndex()
     {
         $entries = LunchEntry::with('user')
             ->where('date', Carbon::today()->toDateString())
             ->get();
 
-        return view('admin.lunch.index', compact('entries'));
+        // Count total lunch entries for today
+        $totalEntriesToday = $entries->count();
+
+        return view('admin.lunch.index', compact('entries', 'totalEntriesToday'));
     }
 
-    // Admin: Approve a lunch entry
+    // Admin Approve a lunch entry
     public function approve(LunchEntry $entry)
     {
         $entry->update(['status' => 'approved']);
         return redirect()->back()->with('success', 'Lunch entry approved.');
     }
 
-    // Admin: Reject a lunch entry
+    // Admin Reject a lunch entry
     public function reject(LunchEntry $entry)
     {
         $entry->update(['status' => 'rejected']);
