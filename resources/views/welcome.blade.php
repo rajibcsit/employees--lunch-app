@@ -960,6 +960,45 @@
             </div>
         </section>
 
+        <!-- How It Works Section -->
+        <section class="mt-24 text-center">
+            <h2 class="text-4xl font-bold text-gray-800 mb-12">
+                How It Works
+            </h2>
+            <p class="text-gray-600 text-lg mb-8 max-w-3xl mx-auto">
+                Our streamlined system ensures a smooth experience for employees and administrators alike. Follow these simple steps to get started!
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 px-6 md:px-0">
+                <div class="bg-white p-8 rounded-lg shadow-lg transition-transform transform hover:-translate-y-2 hover:shadow-xl">
+                    <div class="text-pink-600 text-5xl mb-6">
+                        <i class="fa fa-user-plus"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Step 1: Register</h3>
+                    <p class="text-gray-600">
+                        Employees sign up and create their accounts to access the lunch management system.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg transition-transform transform hover:-translate-y-2 hover:shadow-xl">
+                    <div class="text-pink-600 text-5xl mb-6">
+                        <i class="fa fa-utensils"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Step 2: Log Preferences</h3>
+                    <p class="text-gray-600">
+                        Employees log their lunch preferences and submit entries in seconds.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg transition-transform transform hover:-translate-y-2 hover:shadow-xl">
+                    <div class="text-pink-600 text-5xl mb-6">
+                        <i class="fa fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Step 3: Track Entries</h3>
+                    <p class="text-gray-600">
+                        Administrators review and track entries to ensure seamless management.
+                    </p>
+                </div>
+            </div>
+        </section>
+
         <!-- Features at a Glance - Cards -->
         <section class="mt-24">
             <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Features at a Glance</h2>
