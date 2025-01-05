@@ -42,10 +42,12 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if ($user->role == 'admin') {
-            return redirect('/admin/lunch');
-        } else {
-            return redirect('/lunch');
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.lunch.index');
+        } elseif ($user->role === 'employee') {
+            return redirect()->route('lunch.index');
         }
+
+        return redirect('/');
     }
 }

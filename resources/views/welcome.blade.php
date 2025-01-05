@@ -907,7 +907,11 @@
             <a href="#" class="text-2xl font-extrabold text-pink-600">Lunch Entry</a>
             <div class="space-x-6">
                 @auth
-                <a href="{{ url('/dashboard') }}" class="text-gray-700 hover:text-pink-600">Dashboard</a>
+                @if (auth()->user()->role === 'admin')
+                <a href="{{ route('admin.lunch.index') }}" class="text-gray-700 hover:text-pink-600">Dashboard</a>
+                @elseif (auth()->user()->role === 'employee')
+                <a href="{{ route('lunch.index') }}" class="text-gray-700 hover:text-pink-600">Dashboard</a>
+                @endif
                 @else
                 <a href="{{ route('login') }}" class="text-gray-700 hover:text-pink-600">Log in</a>
                 @if (Route::has('register'))
