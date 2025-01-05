@@ -19,7 +19,7 @@ class LunchEntryController extends Controller
         return view('lunch.index', compact('entries'));
     }
 
-    // Employee: Store lunch entry
+    // Employee Store lunch entry
     public function store(Request $request)
     {
         $user = auth()->user();
@@ -39,6 +39,25 @@ class LunchEntryController extends Controller
         return redirect()->back()->with('success', 'Lunch entry submitted successfully.');
     }
 
+    // Employee Cancle lunch entry
+    public function cancel(LunchEntry $entry)
+    {
+        $user = auth()->user();
+
+        if ($entry->user_id !== $user->id) {
+            return redirect()->back()->with('error', 'Unauthorized action.');
+        }
+
+        if ($entry->status !== 'pending') {
+            return redirect()->back()->with('error', 'Only pending entries can be canceled.');
+        }
+
+        $entry->delete();
+
+        return redirect()->back()->with('success', 'Lunch entry canceled successfully.');
+    }
+
+
     // Admin View all lunch entries for today
     public function adminIndex()
     {
@@ -46,16 +65,9 @@ class LunchEntryController extends Controller
             ->where('date', Carbon::today()->toDateString())
             ->get();
 
-        // Count total lunch entries for today
         $totalEntriesToday = $entries->count();
-
-        // Count total pending entries
         $totalPending = $entries->where('status', 'pending')->count();
-
-        // Count total rejected entries
         $totalRejected = $entries->where('status', 'rejected')->count();
-
-        // Count total approved entries
         $totalApproved = $entries->where('status', 'approved')->count();
 
         return view('admin.lunch.index', compact('entries', 'totalEntriesToday', 'totalPending', 'totalRejected', 'totalApproved'));

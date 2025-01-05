@@ -30,9 +30,7 @@
                                 <th width="70px">ID</th>
                                 <th>Date</th>
                                 <th>Status</th>
-                                @if(auth()->user()->is_admin)
                                 <th>Action</th>
-                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -57,6 +55,16 @@
                                     @endif
                                 </td>
                                 @endif
+                                <td>
+                                    @if($entry->status === 'pending')
+                                    <form action="{{ route('lunch.cancel', $entry) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-warning btn-sm">
+                                            <i class="fa fa-times"></i> Cancel
+                                        </button>
+                                    </form>
+                                    @endif
+                                </td>
                             </tr>
                             @empty
                             <tr>

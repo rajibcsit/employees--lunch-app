@@ -16,6 +16,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth'])->group(function () {
     Route::get('/lunch', [LunchEntryController::class, 'index'])->name('lunch.index');
     Route::post('/lunch/entry', [LunchEntryController::class, 'store'])->name('lunch.store');
+    Route::post('/lunch/cancel/{entry}', [LunchEntryController::class, 'cancel'])->name('lunch.cancel');
 
     // Admin Routes
     Route::get('/admin/lunch', [LunchEntryController::class, 'adminIndex'])->name('admin.lunch.index');
