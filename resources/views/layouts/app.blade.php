@@ -13,8 +13,6 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <!-- Styles / Scripts -->
@@ -30,7 +28,7 @@
                 <div class="flex justify-between items-center py-4">
                     <!-- Brand -->
                     <a href="{{ url('/') }}" class="text-2xl font-extrabold text-pink-600">
-                        Employee Lunch Management
+                        T-Lunch
                     </a>
 
                     <!-- Hamburger Menu (Mobile) -->
@@ -44,13 +42,13 @@
                     <div class="hidden md:flex items-center space-x-6" id="navbar-menu">
                         @guest
                         @if (Route::has('login'))
-                        <a href="{{ route('login') }}" class="text-gray-700 hover:text-pink-600 transition duration-300">
+                        <a href="{{ route('login') }}" class="bg-gradient-to-r from-pink-500 to-pink-700 text-white font-semibold py-2 px-6 rounded shadow hover:from-pink-600 hover:to-pink-800 focus:ring-2 focus:ring-pink-400 focus:outline-none transition duration-300">
                             Login
                         </a>
                         @endif
 
                         @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="text-gray-700 hover:text-pink-600 transition duration-300">
+                        <a href="{{ route('register') }}" class="bg-gradient-to-r from-pink-500 to-pink-700 text-white font-semibold py-2 px-6 rounded shadow hover:from-pink-600 hover:to-pink-800 focus:ring-2 focus:ring-pink-400 focus:outline-none transition duration-300">
                             Register
                         </a>
                         @endif

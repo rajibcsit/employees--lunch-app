@@ -51,7 +51,9 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 px-6 md:px-0">
                 <div class="bg-white p-8 rounded-lg shadow-lg transition-transform transform hover:-translate-y-2 hover:shadow-xl">
                     <div class="text-pink-600 text-5xl mb-6">
-                        <i class="fa fa-user-plus"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="w-16 h-16 mx-auto">
+                            <path fill="currentColor" d="M15 4a4 4 0 0 0-4 4a4 4 0 0 0 4 4a4 4 0 0 0 4-4a4 4 0 0 0-4-4m0 1.9a2.1 2.1 0 1 1 0 4.2A2.1 2.1 0 0 1 12.9 8A2.1 2.1 0 0 1 15 5.9M4 7v3H1v2h3v3h2v-3h3v-2H6V7zm11 6c-2.67 0-8 1.33-8 4v3h16v-3c0-2.67-5.33-4-8-4m0 1.9c2.97 0 6.1 1.46 6.1 2.1v1.1H8.9V17c0-.64 3.1-2.1 6.1-2.1" />
+                        </svg>
                     </div>
                     <h3 class="text-2xl font-semibold mb-4">Step 1: Register</h3>
                     <p class="text-gray-600">
@@ -60,7 +62,9 @@
                 </div>
                 <div class="bg-white p-8 rounded-lg shadow-lg transition-transform transform hover:-translate-y-2 hover:shadow-xl">
                     <div class="text-pink-600 text-5xl mb-6">
-                        <i class="fa fa-utensils"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="w-16 h-16 mx-auto">
+                            <path fill="currentColor" d="M19 3H5c-1.11 0-2 .89-2 2v4h2V5h14v14H5v-4H3v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-8.92 12.58L11.5 17l5-5l-5-5l-1.42 1.41L12.67 11H3v2h9.67z" />
+                        </svg>
                     </div>
                     <h3 class="text-2xl font-semibold mb-4">Step 2: Log Preferences</h3>
                     <p class="text-gray-600">
@@ -69,7 +73,9 @@
                 </div>
                 <div class="bg-white p-8 rounded-lg shadow-lg transition-transform transform hover:-translate-y-2 hover:shadow-xl">
                     <div class="text-pink-600 text-5xl mb-6">
-                        <i class="fa fa-chart-line"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="w-16 h-16 mx-auto">
+                            <path fill="currentColor" d="m16 11.78l4.24-7.33l1.73 1l-5.23 9.05l-6.51-3.75L5.46 19H22v2H2V3h2v14.54L9.5 8z" />
+                        </svg>
                     </div>
                     <h3 class="text-2xl font-semibold mb-4">Step 3: Track Entries</h3>
                     <p class="text-gray-600">
