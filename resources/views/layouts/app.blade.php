@@ -137,6 +137,36 @@
         <main class="py-4">
             @yield('content')
         </main>
+        <!-- Footer Section -->
+        <footer class="bg-gray-800 text-white mt-16">
+            <div class="container mx-auto px-4 py-12 flex flex-col md:flex-row justify-between">
+                <div class="mb-8 md:mb-0">
+                    <h3 class="text-2xl font-bold">T-Lunch</h3>
+                    <p class="text-gray-400 mt-2">Simplifying employee lunch management with ease and efficiency.</p>
+                </div>
+                <div class="flex space-x-12">
+                    <div>
+                        <h4 class="text-lg font-semibold">Company</h4>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-pink-400">About Us</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-pink-400">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold">Support</h4>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-pink-400">Help Center</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-pink-400">FAQs</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-pink-400">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-between items-center py-4 border-t border-gray-700 px-4">
+                <p class="text-gray-500">&copy; 2025 T-Lunch. All Rights Reserved.</p>
+                <p class="text-gray-500">Developed by TwiteSoft</p>
+            </div>
+        </footer>
     </div>
     <script>
         // Mobile Menu Toggle
