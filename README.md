@@ -17,7 +17,7 @@ Follow these steps to set up the application locally:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/rajibcsit/employees--lunch-app
+   git clone https://github.com/rajibcsit/twiteLunch-app
 
 2. Navigate to the project folder:
    cd t-lunch
