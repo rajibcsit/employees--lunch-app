@@ -17,68 +17,144 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <!-- Styles / Scripts -->
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @endif
 </head>
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <nav class="bg-white shadow-sm">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center py-4">
+                    <!-- Brand -->
+                    <a href="{{ url('/') }}" class="text-2xl font-extrabold text-pink-600">
+                        Employee Lunch Management
+                    </a>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+                    <!-- Hamburger Menu (Mobile) -->
+                    <button class="block md:hidden text-gray-600 focus:outline-none" id="navbar-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
 
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
+                    <!-- Navigation Links -->
+                    <div class="hidden md:flex items-center space-x-6" id="navbar-menu">
                         @guest
                         @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a href="{{ route('login') }}" class="text-gray-700 hover:text-pink-600 transition duration-300">
+                            Login
+                        </a>
+                        @endif
+
+                        @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="text-gray-700 hover:text-pink-600 transition duration-300">
+                            Register
+                        </a>
+                        @endif
+                        @else
+                        @if (auth()->user()->role === 'admin')
+                        <a href="{{ route('admin.lunch.index') }}" class="text-gray-700 hover:text-pink-600 transition duration-300">
+                            Dashboard
+                        </a>
+                        @elseif (auth()->user()->role === 'employee')
+                        <a href="{{ route('lunch.index') }}" class="text-gray-700 hover:text-pink-600 transition duration-300">
+                            Dashboard
+                        </a>
+                        @endif
+
+                        <!-- Authenticated Dropdown -->
+                        <div class="relative">
+                            <button class="flex items-center space-x-2 text-gray-700 hover:text-pink-600 focus:outline-none transition duration-300" id="dropdown-toggle">
+                                <span>{{ Auth::user()->name }}</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+
+                            <!-- Dropdown Menu -->
+                            <div class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg hidden" id="dropdown-menu">
+                                <a href="{{ route('logout') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-300"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                    @csrf
+                                </form>
+                            </div>
+                        </div>
+                        @endguest
+                    </div>
+                </div>
+
+                <!-- Mobile Menu -->
+                <div class="md:hidden hidden" id="mobile-menu">
+                    <ul class="space-y-4">
+                        @guest
+                        @if (Route::has('login'))
+                        <li>
+                            <a href="{{ route('login') }}" class="block text-gray-700 hover:text-pink-600 transition duration-300">
+                                Login
+                            </a>
                         </li>
                         @endif
 
                         @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        <li>
+                            <a href="{{ route('register') }}" class="block text-gray-700 hover:text-pink-600 transition duration-300">
+                                Register
+                            </a>
                         </li>
                         @endif
                         @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
+                        @if (auth()->user()->role === 'admin')
+                        <li>
+                            <a href="{{ route('admin.lunch.index') }}" class="block text-gray-700 hover:text-pink-600 transition duration-300">
+                                Dashboard
                             </a>
-
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
+                        </li>
+                        @elseif (auth()->user()->role === 'employee')
+                        <li>
+                            <a href="{{ route('lunch.index') }}" class="block text-gray-700 hover:text-pink-600 transition duration-300">
+                                Dashboard
+                            </a>
+                        </li>
+                        @endif
+                        <li>
+                            <a href="{{ route('logout') }}" class="block text-gray-700 hover:text-pink-600 transition duration-300"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                @csrf
+                            </form>
                         </li>
                         @endguest
                     </ul>
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             @yield('content')
         </main>
     </div>
+    <script>
+        // Mobile Menu Toggle
+        const navbarToggle = document.getElementById('navbar-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        navbarToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Dropdown Toggle
+        const dropdownToggle = document.getElementById('dropdown-toggle');
+        const dropdownMenu = document.getElementById('dropdown-menu');
+        dropdownToggle?.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 
 </html>
