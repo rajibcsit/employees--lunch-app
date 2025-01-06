@@ -55,11 +55,11 @@
                         </a>
                         @endif
                         @else
-                        @if (auth()->user()->role === 'admin')
+                        @if (auth()->user()->role === 'admin' && Route::currentRouteName() !== 'admin.lunch.index')
                         <a href="{{ route('admin.lunch.index') }}" class="text-gray-700 hover:text-pink-600 transition duration-300">
                             Dashboard
                         </a>
-                        @elseif (auth()->user()->role === 'employee')
+                        @elseif (auth()->user()->role === 'employee' && Route::currentRouteName() !== 'lunch.index')
                         <a href="{{ route('lunch.index') }}" class="text-gray-700 hover:text-pink-600 transition duration-300">
                             Dashboard
                         </a>
