@@ -88,12 +88,12 @@
                 </div>
 
                 <!-- Mobile Menu -->
-                <div class="md:hidden hidden" id="mobile-menu">
+                <div class="absolute top-16 left-0 w-full bg-white/90 border border-gray-200 shadow-lg p-4 rounded-md z-50 md:hidden hidden" id="mobile-menu">
                     <ul class="space-y-4">
                         @guest
                         @if (Route::has('login'))
                         <li>
-                            <a href="{{ route('login') }}" class="block text-gray-700 hover:text-pink-600 transition duration-300">
+                            <a href="{{ route('login') }}" class="bg-gradient-to-r from-pink-500 to-pink-700 text-white font-medium py-1 px-4 rounded-md shadow-md text-sm hover:from-pink-600 hover:to-pink-800 focus:ring-2 focus:ring-offset-1 focus:ring-pink-400 focus:outline-none transition duration-300 text-center">
                                 Login
                             </a>
                         </li>
@@ -101,7 +101,7 @@
 
                         @if (Route::has('register'))
                         <li>
-                            <a href="{{ route('register') }}" class="block text-gray-700 hover:text-pink-600 transition duration-300">
+                            <a href=" {{ route('register') }}" class="bg-gradient-to-r from-pink-500 to-pink-700 text-white font-medium py-1 px-4 rounded-md shadow-md text-sm hover:from-pink-600 hover:to-pink-800 focus:ring-2 focus:ring-offset-1 focus:ring-pink-400 focus:outline-none transition duration-300 text-center">
                                 Register
                             </a>
                         </li>
