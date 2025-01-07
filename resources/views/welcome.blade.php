@@ -7,11 +7,24 @@
     <div class="container mx-auto px-4 py-16">
         <section class="flex flex-wrap items-center justify-between">
             <div class="w-full lg:w-1/2 mb-10 lg:mb-0">
-                <h1 class="text-5xl font-extrabold leading-tight text-pink-600">Effortless Lunch Management</h1>
-                <p class="text-lg text-gray-600 mt-6">Track and manage employee lunches with ease. A seamless solution designed for efficiency.</p>
-                <button class="mt-8 px-6 py-3 bg-pink-600 text-white text-lg rounded-lg shadow-lg hover:bg-pink-500">
+                <div class="pb-8">
+                    <h1 class="text-5xl font-extrabold leading-tight text-pink-600">Effortless Lunch Management</h1>
+                    <p class="text-lg text-gray-600 mt-6">Track and manage employee lunches with ease. A seamless solution designed for efficiency.</p>
+                </div>
+
+                @if (auth()->check())
+                <a href="{{ auth()->user()->role === 'admin' ? route('admin.lunch.index') : route('lunch.index') }}"
+                    class="mt-16 px-6 py-3 bg-pink-600 text-white text-lg rounded-lg shadow-lg hover:bg-pink-500">
+                    Dashboard
+                </a>
+                @else
+                <a href="{{ route('login') }}"
+                    class="mt-16 px-6 py-3 bg-pink-600 text-white text-lg rounded-lg shadow-lg hover:bg-pink-500">
                     Get Started
-                </button>
+                </a>
+                @endif
+
+
             </div>
             <div class="w-full lg:w-1/2">
                 <img src="{{ asset('hero.png') }}" alt="Lunch Entry Illustration" class="w-full max-w-lg mx-auto rounded-xl shadow-xl">

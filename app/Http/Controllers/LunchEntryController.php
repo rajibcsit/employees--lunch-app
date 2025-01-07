@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\LunchEntry;
 use Carbon\Carbon;
+use App\Models\LunchEntry;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LunchEntryController extends Controller
 {
     // Employee: View and manage lunch entries
     public function index()
     {
-        $user = auth()->user();
+        $user = Auth::user();
         $entries = LunchEntry::where('user_id', $user->id)
             ->orderBy('date', 'desc')
             ->get();
@@ -22,7 +23,7 @@ class LunchEntryController extends Controller
     // Employee Store lunch entry
     public function store(Request $request)
     {
-        $user = auth()->user();
+        $user = Auth::user();
         $today = Carbon::today()->toDateString();
 
         // Prevent duplicate entries for the same day
@@ -42,7 +43,7 @@ class LunchEntryController extends Controller
     // Employee Cancle lunch entry
     public function cancel(LunchEntry $entry)
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
         if ($entry->user_id !== $user->id) {
             return redirect()->back()->with('error', 'Unauthorized action.');
