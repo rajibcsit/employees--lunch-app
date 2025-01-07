@@ -41,24 +41,21 @@
                     <!-- Navigation Links -->
                     <div class="hidden md:flex items-center space-x-6" id="navbar-menu">
                         @guest
-                        @if (Route::has('login'))
-                        <a href="{{ route('login') }}" class="bg-gradient-to-r from-pink-500 to-pink-700 text-white font-semibold py-2 px-6 rounded shadow hover:from-pink-600 hover:to-pink-800 focus:ring-2 focus:ring-pink-400 focus:outline-none transition duration-300">
-                            Login
+                        @foreach (['login' => 'Login', 'register' => 'Register'] as $route => $label)
+                        @if (Route::has($route))
+                        <a href="{{ route($route) }}" class="bg-gradient-to-r from-pink-500 to-pink-700 text-white font-semibold py-2 px-6 rounded shadow hover:from-pink-600 hover:to-pink-800 focus:ring-2 focus:ring-pink-400 focus:outline-none transition duration-300">
+                            {{ $label }}
                         </a>
                         @endif
-
-                        @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="bg-gradient-to-r from-pink-500 to-pink-700 text-white font-semibold py-2 px-6 rounded shadow hover:from-pink-600 hover:to-pink-800 focus:ring-2 focus:ring-pink-400 focus:outline-none transition duration-300">
-                            Register
-                        </a>
-                        @endif
+                        @endforeach
                         @else
-                        @if (auth()->user()->role === 'admin' && Route::currentRouteName() !== 'admin.lunch.index')
-                        <a href="{{ route('admin.lunch.index') }}" class="text-gray-700 hover:text-pink-600 transition duration-300">
-                            Dashboard
-                        </a>
-                        @elseif (auth()->user()->role === 'employee' && Route::currentRouteName() !== 'lunch.index')
-                        <a href="{{ route('lunch.index') }}" class="text-gray-700 hover:text-pink-600 transition duration-300">
+                        @php
+                        $dashboardRoute = auth()->user()->role === 'admin' ? 'admin.lunch.index' : 'lunch.index';
+                        $currentRoute = Route::currentRouteName();
+                        @endphp
+
+                        @if ($currentRoute !== $dashboardRoute)
+                        <a href="{{ route($dashboardRoute) }}" class="text-gray-700 hover:text-pink-600 transition duration-300">
                             Dashboard
                         </a>
                         @endif
@@ -66,7 +63,7 @@
                         <!-- Authenticated Dropdown -->
                         <div class="relative">
                             <button class="flex items-center space-x-2 text-gray-700 hover:text-pink-600 focus:outline-none transition duration-300" id="dropdown-toggle">
-                                <span>{{ Auth::user()->name }}</span>
+                                <span>{{ auth()->user()->name }}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                 </svg>
@@ -85,54 +82,40 @@
                         </div>
                         @endguest
                     </div>
-                </div>
 
-                <!-- Mobile Menu -->
-                <div class="absolute top-16 left-0 w-full bg-white/90 border border-gray-200 shadow-lg p-4 rounded-md z-50 md:hidden hidden" id="mobile-menu">
-                    <ul class="space-y-4">
-                        @guest
-                        @if (Route::has('login'))
-                        <li>
-                            <a href="{{ route('login') }}" class="bg-gradient-to-r from-pink-500 to-pink-700 text-white font-medium py-1 px-4 rounded-md shadow-md text-sm hover:from-pink-600 hover:to-pink-800 focus:ring-2 focus:ring-offset-1 focus:ring-pink-400 focus:outline-none transition duration-300 text-center">
-                                Login
-                            </a>
-                        </li>
-                        @endif
+                    <!-- Mobile Menu -->
+                    <div class="absolute top-16 left-0 w-full bg-white/90 border border-gray-200 shadow-lg p-4 rounded-md z-50 md:hidden hidden" id="mobile-menu">
+                        <ul class="space-y-4">
+                            @guest
+                            @foreach (['login' => 'Login', 'register' => 'Register'] as $route => $label)
+                            @if (Route::has($route))
+                            <li>
+                                <a href="{{ route($route) }}" class="bg-gradient-to-r from-pink-500 to-pink-700 text-white font-medium py-1 px-4 rounded-md shadow-md text-sm hover:from-pink-600 hover:to-pink-800 focus:ring-2 focus:ring-offset-1 focus:ring-pink-400 focus:outline-none transition duration-300 text-center">
+                                    {{ $label }}
+                                </a>
+                            </li>
+                            @endif
+                            @endforeach
+                            @else
+                            <li>
+                                <a href="{{ route($dashboardRoute) }}" class="block text-gray-700 hover:text-pink-600 transition duration-300">
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('logout') }}" class="block text-gray-700 hover:text-pink-600 transition duration-300"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();">
+                                    Logout
+                                </a>
+                                <form id="logout-form-mobile" action="{{ route('logout') }}" method="POST" class="hidden">
+                                    @csrf
+                                </form>
+                            </li>
+                            @endguest
+                        </ul>
+                    </div>
 
-                        @if (Route::has('register'))
-                        <li>
-                            <a href=" {{ route('register') }}" class="bg-gradient-to-r from-pink-500 to-pink-700 text-white font-medium py-1 px-4 rounded-md shadow-md text-sm hover:from-pink-600 hover:to-pink-800 focus:ring-2 focus:ring-offset-1 focus:ring-pink-400 focus:outline-none transition duration-300 text-center">
-                                Register
-                            </a>
-                        </li>
-                        @endif
-                        @else
-                        @if (auth()->user()->role === 'admin')
-                        <li>
-                            <a href="{{ route('admin.lunch.index') }}" class="block text-gray-700 hover:text-pink-600 transition duration-300">
-                                Dashboard
-                            </a>
-                        </li>
-                        @elseif (auth()->user()->role === 'employee')
-                        <li>
-                            <a href="{{ route('lunch.index') }}" class="block text-gray-700 hover:text-pink-600 transition duration-300">
-                                Dashboard
-                            </a>
-                        </li>
-                        @endif
-                        <li>
-                            <a href="{{ route('logout') }}" class="block text-gray-700 hover:text-pink-600 transition duration-300"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Logout
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                                @csrf
-                            </form>
-                        </li>
-                        @endguest
-                    </ul>
                 </div>
-            </div>
         </nav>
         <main class="py-4">
             @yield('content')
