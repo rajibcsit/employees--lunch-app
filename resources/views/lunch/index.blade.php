@@ -53,7 +53,7 @@
                         <table class="min-w-full bg-white border border-gray-200">
                             <thead>
                                 <tr class="bg-gray-100">
-                                    <th class="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-600">ID</th>
+                                    <th class="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-600">SL</th>
                                     <th class="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-600">Date</th>
                                     <th class="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-600">Status</th>
                                     <th class="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-600">Action</th>
@@ -62,7 +62,7 @@
                             <tbody>
                                 @forelse($entries as $entry)
                                 <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 border-b border-gray-200 text-sm">{{ $entry->id }}</td>
+                                    <td class="px-6 py-4 border-b border-gray-200 text-sm">{{ $loop->iteration  }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200 text-sm">{{ $entry->date }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200 text-sm">
                                         @if($entry->status === 'approved')
