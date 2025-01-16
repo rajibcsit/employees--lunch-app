@@ -5,6 +5,7 @@ T-lunch is a Laravel-based web application designed to manage employee lunch ent
 ## Features
 
 - **Employee Lunch Entries**: Manage lunch details for employees, including the type of meal, date, and special requests.
+- **Employee Get Notification-Reminder**: Employees receive a daily reminder to mark their lunch entry.
 - **User Authentication**: Employees and admins can log in to manage lunch entries using the Laravel UI Bootstrap Auth package.
 - **Frontend Design**: The UI is styled with Tailwind CSS for a responsive and modern layout.
 - **CRUD Operations**: Create, read, update and delete lunch entries.
